@@ -58,3 +58,14 @@ Run the below command in a directory where your docker-compose.yml file resides:
 ```bash
 $ docker compose up -d
 ```
+
+When stopping all the containers run the following command:
+```bash
+$ docker compose down
+```
+
+It is also possible to stop only specific containers:
+```bash
+$ docker stop [container-name or contianer ID]
+```
+_Tip: you only need to specify the number of characters or digits (from the beginning) in the container ID that makes it unique among your running continaers._
