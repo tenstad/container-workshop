@@ -27,7 +27,7 @@ TODO `docker ps -a`
 
 ### `-it`
 
-`-it` is a combination of both `--interactive` and `--tty`. `--tty` is essentially a viritual terminal session.
+`-it` is a combination of both `--interactive` and `--tty`. `--tty` is essentially a virtual terminal session.
 
 ### `--rm`
 
