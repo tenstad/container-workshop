@@ -42,23 +42,78 @@ WORKDIR /app
 
 ### `COPY`
 
-TODO: COPY
+`COPY` copies files from your local filesystem into the container image. Only
+files within the _build context_ (a folder specified on build) may be copied. It
+is quite similar to `cp` on unix systems. Both single files and directories may
+be copied, and the target path will automatically be created if absent. If the
+destination is relative (not staring with `/`), it will be relative to the
+`WORKDIR`.
+
+```Dockerfile
+# Copy all files within the build context into the working directory of the
+# container image
+COPY . .
+
+# Copy only the src folder within the build context into src within the root
+# of the container filesystem
+COPY src /src
+
+# Copy the file index.html into /var/www/html/index.html, even though the
+# folder /var/www/html/ does not already exist
+COPY html/index.html /var/www/html/index.html
+```
 
 ### `RUN`
 
-TODO: RUN
+`RUN` runs a command within the shell of the container beeing built. It is often
+used to update or install packages, and compile or build the project. Commands
+are often written on one line each, with `\` at the end of all lines but the
+last.
+
+```Dockerfile
+RUN npm install \
+    && npm build
+```
 
 ### `ARG`
 
-TODO: ARG
+`ARG` is used to accept build arguments passed when building an image. It may be
+the version of a piece of software or any other value that you wish to specify
+when building.
+
+```Dockerfile
+ARG JQ_VERSION=1.6
+RUN apt-get update && apt-get install -y \
+    curl \
+    && rm -rf /var/lib/apt/lists/* \
+    && curl -sSLo /usr/local/bin/jq \
+    https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-linux64 \
+    && chmod +x /usr/local/bin/jq
+```
 
 ### `ENV`
 
-TODO: ENV
+`ENV` is used to define environment variables within the container. They are
+variables that may be used by any process within the container, such as `PATH`
+or `JAVA_HOME`. Note that you may define additional environment variables when
+running a container based on the image. It may be used in conjunction with
+`ARG`.
+
+```Dockerfile
+ARG LOG_LEVEL=info
+ENV LOG_LEVEL=$LOG_LEVEL
+```
+
+Here, one may override the log level when building the application, but by
+default it is `info`.
 
 ### `CMD`
 
-TODO: CMD
+`CMD` is used to specify the command or executable that runs on startup.
+
+```Dockerfile
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+```
 
 ### `ENTRYPOINT`
 Very similar to `cmd` but these commands will _not_ be overwridden by arguments stated through the CLI when running a container.
