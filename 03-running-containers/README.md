@@ -27,7 +27,7 @@ TODO `docker ps -a`
 
 ### `-it`
 
-`-it` is a combination of both `--interactive` and `--tty`
+`-it` is a combination of both `--interactive` and `--tty`. `--tty` is essentially a viritual terminal session.
 
 ### `--rm`
 
@@ -47,5 +47,5 @@ TODO `docker ps -a`
 
 ## Entering a running container
 
-`exec -it`
+`docker exec [OPTIONS] CONTAINER COMMAND [ARG...]`
 
