@@ -26,10 +26,24 @@ Docker](https://github.com/GoogleContainerTools/distroless#examples-with-docker)
 to minimize the `goweb` image built earlier. How large was the original image
 and how small are you able to get it?
 
-## CNCF
+## Buildah
 
-https://landscape.cncf.io/
+Buildah is another container image building tool that does things a bit differently.
+
+Check out the tutorials: <https://github.com/containers/buildah/tree/main/docs/tutorials>
+
+## Podman
+
+If you like the docker experience but not Docker Inc, maybe checkout Podman:
+<https://podman.io/>. It has the same commands, but is not as locked into Docker
+Inc. and their echosystem.
 
 ## Open Container Initiative
 
-https://opencontainers.org/
+OCI defines the spec for container images: <https://opencontainers.org/>
+
+## Cloud Native Computing Foundation
+
+CNCF has a lot of cool open source projects revolving around containers:
+<https://www.cncf.io/projects/>. Also checkout their full landscape:
+<https://landscape.cncf.io/>.
