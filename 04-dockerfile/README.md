@@ -1,7 +1,7 @@
 # Dockerfile
 
 If at any point something is unclear, please refer to Docker's [Dockerfile
-reference](https://docs.docker.com/engine/reference/builder/) for a more through
+reference](https://docs.docker.com/engine/reference/builder/) for a more thorough
 explanation. Use the _Contents_ on the right side to navigate to specific
 sections or Dockerfile instructions.
 
@@ -59,6 +59,9 @@ TODO: ENV
 ### `CMD`
 
 TODO: CMD
+
+### `ENTRYPOINT`
+Very similar to `cmd` but these commands will _not_ be overwridden by arguments stated through the CLI when running a container.
 
 ## Example Dockerfile
 
