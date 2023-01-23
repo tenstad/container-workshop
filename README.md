@@ -8,7 +8,7 @@ _docker images_, _docker containers_. However, container technology is much more
 than just Docker.
 
 This is a hands-on workshop where you will learn about container technology
-though actual use, along with some of the tooling that improves upon the
+through actual use, along with some of the tooling that improves upon the
 experience of developing and working with containers. Any container technology
 tools may be used to build images and run containers, but Docker has been chosen
 in the examples as it likely the most accessible for the majority of people.
