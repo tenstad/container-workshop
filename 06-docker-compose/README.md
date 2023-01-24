@@ -18,7 +18,6 @@ A docker-compose file often consist of multuple services. Think of a service as 
 ```yaml
 services:
   backend:
-    container_name: backend
     build: ./backend
     restart: always
     ports:
@@ -30,12 +29,13 @@ services:
     volumes: ./backend/cache:/app/cache/
 ```
 
-The container name is `backend`. It has no `image` defined, but is rather build
-from the dockerfile within the `./backend` directory. It is configured to
-restart if were to stop. The other keys should be known from previous sections.
-In short, the port `8000` is forwarded to the container, and it is part of the
-network `web`. Additionally, a volume is mounted so that the cache is kept even
-though the container is restarted.
+The container name is `backend`, the maps item's key within `services`. It has
+no `image` defined, but is rather build from the dockerfile within the
+`./backend` directory. It is configured to restart if were to stop. The other
+keys should be known from previous sections. In short, the port `8000` is
+forwarded to the container, and it is part of the network `web`. Additionally, a
+volume is mounted so that the cache is kept even though the container is
+restarted.
 
 ## Usage
 
@@ -64,10 +64,7 @@ docker compose up -d
 
 The containers are now running as if you started them manually with `docker run`.
 
-📝 See whats going on with `docker ps` and `docker compose logs`.
-
-One container name will be automatically deduced from the folder and container
-id, as `container_name` was not specified.
+📝 See whats happening with `docker ps` and `docker compose logs`
 
 📝 To stop all the containers run the following:
 
@@ -80,15 +77,31 @@ docker compose down
 In this session we will build a realworld application put together by
 
 - a frontend written in React Redux
-- a backend written in
-- a database
+- a backend written in Node
+- a mysql database
+
+### prerequisites
+
+Create two folders in the directory `06-docker-compose/realworld` named `frontend` and `backend`. Clone the following gir repositories into the two tasks:
+
+- [react realworld](https://github.com/khaledosman/react-redux-realworld-example-app)
+
+```bash
+git clone git@github.com:khaledosman/react-redux-realworld-example-app.git frontend/react-realworld
+```
+
+- [node realworld](https://github.com/ditsmod/realworld#getting-started)
+
+```bash
+git clone git@github.com:ditsmod/realworld.git backend/node-realworld
+```
 
 ### Task 1
 
-Change directory to `06-docker-compose/src`
+Change directory to `06-docker-compose/realworld`
 
 ```bash
-cd 06-docker-compose/src
+cd 06-docker-compose/realworld
 ```
 
 Take a look at det docker-compose.yml file and run the following command:
@@ -101,7 +114,18 @@ List the running containers with the `docker ps` command and see that a frontend
 
 ### Task 2
 
-This frontend application is using the production backend api. This can be overridden with a environment variable
+When opening the browser at [localhost:4100](localhost:4100) we see that the frontend application is running and it is using the production backend api. Lets run the backend in a container instead. 
+
+We have already cloned the backend project in `06-docker-compose/realworld/backend/node-realworld`. Follow the same structure as the one describing the frontend-service and include these instructions:
+
+```bash
+container_name:
+build:
+ports:
+```
+
+### Task 3
+This can be overridden with a environment variable
 
 ```yaml
 environment:
@@ -109,18 +133,6 @@ environment:
 ```
 
 add this to the spec of the `conduit-frontend` service in the `docker-compose.yml` file and run the same docker-compose command as in Task 1.
-
-### Task 3
-
-When opening the browser at [localhost:4100](localhost:4100) now we see that the appliaction will not load because it does not get any response form the locally running backend api - lets create one.
-
-We already have a backend code in `06-docker-compose/src/backend/node-realworld`. Follow the same structure as the one describing the frontend-service and include these instructions:
-
-```bash
-container_name:
-build:
-ports:
-```
 
 ### Task 4
 
