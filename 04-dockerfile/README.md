@@ -121,10 +121,6 @@ Similar to `CMD`. If you want, see [Docker's
 description](https://docs.docker.com/engine/reference/builder/#entrypoint), as
 it is a bit tricky to explain.
 
-## Example Dockerfile
-
-TODO: Basic FROM COPY RUN CMD example
-
 ## Linting with Hadolint
 
 [Hadolint](https://github.com/hadolint/hadolint) will help you follow [best
@@ -135,6 +131,5 @@ your CI/CD pipeline. In addition to avoiding pointless arguments, it will make
 sure the Dockerfiles are (more likely) error free and that the resulting
 container image is more reliable and smaller in size.
 
-TODO: How to Hadolint (local or https://hadolint.github.io/hadolint/)
-
-TODO: Task: Lint your Dockerfile
+📝 See some examples of what Hadolint may assist with over at:
+<https://hadolint.github.io/hadolint>
