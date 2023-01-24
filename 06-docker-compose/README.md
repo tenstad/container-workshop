@@ -1,66 +1,78 @@
 # Docker Compose
 
-## What is Docker Compose?
-Docker Compose is a tool for defining and running multi-container Docker applications. With compose you can run multiple cooperating contianers with only a single command that builds your containers and sorrunding environment based on the configurations described in a `docker-compose.yaml` file.
+Docker Compose is a tool used to configure and run applications consisting of
+multiple containers. With compose you can run multiple cooperating contianers
+with only a single command, that builds your containers and sorrunding
+environment based on the configurations described in a `docker-compose.yaml`
+file.
 
-TODO: elaborate
+It is in essence two parts to it. The first beeing the docker compose file's
+standard for defining the commandline flags of `docker run`, for multiple
+containers. The second is the tool that runs the containers with the
+configuration defiend in the file.
 
 ## YAML-configuration
 
-### `services`
-A service is equivalent to a container or an application. 
-
-- Service properties:
+A docker-compose file often consist of multuple services. Think of a service as an application or a container. In the example below you can see some of the fiels one may configure:
 
 ```yaml
-image: <image_name>
-name: <service_name>
-volumes:
-  - <volume_this_service_uses>
-  - <another_volume_this_service_uses>
-networks: 
-  - <network_this_service_should_use>
-  - <another_network_this_service_should_use>
-ports:
-  - <port_mapping_0>
-  - <port_mapping_1>
-  - <port_mapping_2>
-environment:
-  - <environment_variable_name>: <value_of_the_env_variable>
-  - <another_environment_variable_name>: <value_of_the_env_variable>
+services:
+  backend:
+    build: ./backend
+    restart: always
+    ports:
+      - 8000:8000
+    environment:
+      - DATABASE_HOST=database:5432
+    network:
+      - web
+    volumes:
+      ./backend/cache:/app/cache/
 ```
 
-### `volumes`
-TODO: elaborate
+The container name is `backend`, the maps item's key within `services`. It has
+no `image` defined, but is rather build from the dockerfile within the
+`./backend` directory. It is configured to restart if were to stop. The other
+keys should be known from previous sections. In short, the port `8000` is
+forwarded to the container, and it is part of the network `web`. Additionally, a
+volume is mounted so that the cache is kept even though the container is
+restarted.
 
+## Usage
 
-## Complete Example
-TODO: add example yml
+Depending on how it is installed, use either `docker-compose` or `docker compose` to run the cli tool. The most basic commands are:
 
-## Usage??
 ```bash
-$ docker compose up [OPTIONS] [SERVICE...]
+docker compose up
+docker compose down
 ```
-The most basic command to create and start containers in a compose-file is only by adding the `-d` flag which starts the containers in a detached mode running in the background. 
+
+`up` brings up all the services configured in the dockerfile and outputs the logs for all of them. As with `docker run`, `-d` may be specified to run it detached (in the background). `down` stops all the containers, just like `docker stop`.
 
 Run the below command in a directory where your docker-compose.yml file resides:
+
 ```bash
-$ docker compose up -d --build
+docker compose up -d --build
 ```
+
 `-- build` is for building or rebuilding the services listed in the compose-file.
 
 When stopping all the containers run the following command:
+
 ```bash
-$ docker compose down
+docker compose down
 ```
 
 It is also possible to stop only specific containers:
+
 ```bash
-$ docker stop [container-name or contianer ID]
+docker stop [container-name or contianer ID]
 ```
+
 _Tip: you only need to specify the number of characters or digits (from the beginning) in the container ID that makes it unique among your running continaers._
 
 ## Tasks
+
 In this session we will build a realworld application put together by 
 - a frontend written in React Redux
 - a backend written in 
