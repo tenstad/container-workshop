@@ -1,6 +1,9 @@
 # Container Workshop
 
-TODO: Write an introduction - essence of containers
+Simply explained, containers operate like complete virtual machines, although
+quite a lot smaller and less complex. This allows you as a developer to write
+and test your code and put it into an environment, with e.g. it's OS, dependencies
+and environment variables, that you have complete control over - the container.
 
 Containers have been popularized by _Docker, Inc._ and their tooling. The
 concepts are thus often refered to as _docker_ things, e.g. _docker files_,
