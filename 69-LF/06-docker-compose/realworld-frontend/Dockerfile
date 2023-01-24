@@ -1,4 +1,7 @@
 FROM node:latest
+
 COPY . .
-RUN npm install
+
+RUN npm install --force
+
 CMD ["npm", "start"]

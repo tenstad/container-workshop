@@ -4,6 +4,6 @@ services:
     container_name: react-realworld
     image: conduit-frontend
     restart: always
-    build: ./react-realworld
+    build: ./realworld-frontend
     ports:
       - "4100:4100"
