@@ -10,4 +10,4 @@ FROM scratch
 
 COPY --from=build /app/app /app
 
-CMD ["./app"]
+CMD ["/app"]
