@@ -83,21 +83,22 @@ In this session we will build a realworld application put together by
 - a backend written in Node
 - a mysql database
 
-### prerequisites
+### Prerequisites
 
-Create two folders in the directory `06-docker-compose/realworld` named `frontend` and `backend`. Clone the following gir repositories into the two tasks:
-
-- [react realworld](https://github.com/khaledosman/react-redux-realworld-example-app)
-
-```bash
-git clone git@github.com:khaledosman/react-redux-realworld-example-app.git frontend/react-realworld
-```
-
-- [node realworld](https://github.com/ditsmod/realworld#getting-started)
+In `06-docker-compose/realworld`, clone the following react frontend
+[khaledosman/react-redux-realworld-example-app](https://github.com/khaledosman/react-redux-realworld-example-app)
+and node
+backend[ditsmod/realworld](https://github.com/ditsmod/realworld#getting-started):
 
 ```bash
-git clone git@github.com:ditsmod/realworld.git backend/node-realworld
+git clone git@github.com:khaledosman/react-redux-realworld-example-app.git realworld-frontend
+
+git clone git@github.com:ditsmod/realworld.git realworld-backend
 ```
+
+📝 Both the frontend and backend are missing Dockerfiles, so you will have to create these yourself.
+
+NOTE: Some dependency issues might occur in the frontend, so try using `--force` when installing dependencies with `npm`.
 
 ### Task 1
 
@@ -123,19 +124,32 @@ We have already cloned the backend project in `06-docker-compose/realworld/backe
 
 ```bash
 container_name:
+image:
 build:
 ports:
+environment:
+  - NODE_OPTIONS="--max-old-space-size=4096"
 ```
 
+Run the following command again:
+
+```bash
+docker compose up -d --build
+```
+
+See that all containers are running with the `docker ps` command. 
+
 ### Task 3
-This can be overridden with a environment variable
+Now try to access the appliaction through [localhost:4100](localhost:4100) again. 
+
+Woops. No connection?? Try adding an environment variable that defines the backend-service with its port as the value. 
 
 ```yaml
 environment:
-  - REACT_APP_BACKEND_URL=conduit-backend:3000
+  - REACT_APP_BACKEND_URL=[backend-service:port]
 ```
 
-add this to the spec of the `conduit-frontend` service in the `docker-compose.yml` file and run the same docker-compose command as in Task 1.
+Add this to the spec of the `conduit-frontend` service in the `docker-compose.yml` file and run the same docker-compose command as above.
 
 ### Task 4
 
