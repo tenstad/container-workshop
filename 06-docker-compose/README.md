@@ -153,21 +153,21 @@ Add this to the spec of the `conduit-frontend` service in the `docker-compose.ym
 
 ### Task 4
 
-The backend project includes a `.env` file which defines some environment variables with values used by the mysql database which is included in the project under `06-docker-compose/src/backend/node-realworld/packages/server/sql/`.
+[Localhost:4100](localhost:4100) should now show the same interface as the first time you built the docker-compose file. But something is missing... 
 
-This database can also run as a service defined through the docker-compose.yml file.
-
-TODO: Figure out if .env is overridable??
+There are noe tags and no posts showing. We need to add a database for this. 
 
 Add another service to your `docker-compose.yml` file:
 
 ```yaml
 real_world:
-  image: mysql:latest
-  ports:
-    - "3306:3306"
-  volumes:
-    - realworld:/var/lib/mysql
+    container_name: database
+    image: mysql:latest
+    ports: 
+      - "3306:3306"
+    volumes:
+      - ./backend/node-realworld/packages/server/sql/dump:/docker-entrypoint-initdb.d/
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_DATABASE=realworld
 ```
-
-Find the environment variables in `06-docker-compose/src/backend/node-realworld/packages/server/.env` and include these as environment variables in the backend-application by using the `environment:` description.
