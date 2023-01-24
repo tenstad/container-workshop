@@ -18,6 +18,7 @@ A docker-compose file often consist of multuple services. Think of a service as 
 ```yaml
 services:
   backend:
+    container_name: backend
     build: ./backend
     restart: always
     ports:
@@ -29,13 +30,12 @@ services:
     volumes: ./backend/cache:/app/cache/
 ```
 
-The container name is `backend`, the maps item's key within `services`. It has
-no `image` defined, but is rather build from the dockerfile within the
-`./backend` directory. It is configured to restart if were to stop. The other
-keys should be known from previous sections. In short, the port `8000` is
-forwarded to the container, and it is part of the network `web`. Additionally, a
-volume is mounted so that the cache is kept even though the container is
-restarted.
+The container name is `backend`. It has no `image` defined, but is rather build
+from the dockerfile within the `./backend` directory. It is configured to
+restart if were to stop. The other keys should be known from previous sections.
+In short, the port `8000` is forwarded to the container, and it is part of the
+network `web`. Additionally, a volume is mounted so that the cache is kept even
+though the container is restarted.
 
 ## Usage
 
@@ -64,7 +64,10 @@ docker compose up -d
 
 The containers are now running as if you started them manually with `docker run`.
 
-📝 See whats happening with `docker ps` and `docker compose logs`
+📝 See whats going on with `docker ps` and `docker compose logs`.
+
+One container name will be automatically deduced from the folder and container
+id, as `container_name` was not specified.
 
 📝 To stop all the containers run the following:
 
