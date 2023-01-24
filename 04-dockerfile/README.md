@@ -116,7 +116,10 @@ CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
 ```
 
 ### `ENTRYPOINT`
-Very similar to `cmd` but these commands will _not_ be overwridden by arguments stated through the CLI when running a container.
+
+Similar to `CMD`. If you want, see [Docker's
+description](https://docs.docker.com/engine/reference/builder/#entrypoint), as
+it is a bit tricky to explain.
 
 ## Example Dockerfile
 
