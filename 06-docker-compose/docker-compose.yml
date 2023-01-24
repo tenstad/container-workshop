@@ -1,0 +1,11 @@
+services:
+  web:
+    image: nginx
+    ports:
+      - 8000:80
+  database:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
