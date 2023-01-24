@@ -169,7 +169,7 @@ Add this to the spec of the `conduit-frontend` service in the
 
 ### Task 4
 
-[Localhost:4100](localhost:4100) should now show the same interface as the first
+Now [localhost:4100](localhost:4100) should show the same interface as the first
 time you built the docker-compose file. But something is missing...
 
 There are noe tags and no posts showing. We need to add a database for this.
@@ -183,7 +183,7 @@ real_world:
   ports:
     - "3306:3306"
   volumes:
-    - ./backend/node-realworld/packages/server/sql/dump:/docker-entrypoint-initdb.d/
+    - ./realworld-backend/packages/server/sql/dump:/docker-entrypoint-initdb.d/
   environment:
     - MYSQL_ALLOW_EMPTY_PASSWORD=true
     - MYSQL_DATABASE=realworld
