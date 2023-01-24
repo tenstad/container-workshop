@@ -89,7 +89,7 @@ following:
 
 ### Prerequisites
 
-In `06-docker-compose/realworld`, clone the following react frontend
+In the `06-docker-compose/realworld` folder, clone the following react frontend
 [khaledosman/react-redux-realworld-example-app](https://github.com/khaledosman/react-redux-realworld-example-app)
 and node
 backend[ditsmod/realworld](https://github.com/ditsmod/realworld#getting-started):
@@ -101,31 +101,32 @@ git clone git@github.com:ditsmod/realworld.git realworld-backend
 ```
 
 📝 Both the frontend and backend are missing Dockerfiles, so you will have to
-create these yourself.
+create these yourself, one inside the frontend folder and another in the
+backend.
 
 NOTE: Some dependency issues might occur in the frontend, so try using `--force`
 when installing dependencies with `npm`.
 
 ### Task 1
 
-Change directory to `06-docker-compose/realworld`
+Change directory to `06-docker-compose/realworld`:
 
 ```bash
 cd 06-docker-compose/realworld
 ```
 
-Take a look at det docker-compose.yml file and run the following command:
+Take a look at the `docker-compose.yml` file and run the following command:
 
 ```bash
 docker compose up -d --build
 ```
 
 List the running containers with the `docker ps` command and see that a frontend
-application is available at [localhost:4100](localhost:4100).
+application is running with the port `4100` exposed.
 
 ### Task 2
 
-When opening the browser at [localhost:4100](localhost:4100) we see that the
+When opening the browser at [localhost:4100](http://localhost:4100) we see that the
 frontend application is running and it is using the production backend api. Lets
 run the backend in a container instead.
 
