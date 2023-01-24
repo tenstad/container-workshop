@@ -13,7 +13,9 @@ configuration defiend in the file.
 
 ## YAML-configuration
 
-A docker-compose file often consist of multuple services. Think of a service as an application or a container. In the example below you can see some of the fiels one may configure:
+A docker-compose file often consist of multuple services. Think of a service as
+an application or a container. In the example below you can see some of the
+fiels one may configure:
 
 ```yaml
 services:
@@ -39,7 +41,8 @@ though the container is restarted.
 
 ## Usage
 
-Depending on how it is installed, use either `docker-compose` or `docker compose` to run the cli tool. The most basic commands are:
+Depending on how it is installed, use either `docker-compose` or `docker
+compose` to run the cli tool. The most basic commands are:
 
 ```bash
 docker compose up -d --build
@@ -77,11 +80,12 @@ docker compose down
 
 ## Tasks
 
-In this session we will build a realworld application put together by
+In this session we will build a realworld application consisting of the
+following:
 
-- a frontend written in React Redux
-- a backend written in Node
-- a mysql database
+- Frontend written in React Redux
+- Backend written in Node
+- Mysql database
 
 ### Prerequisites
 
@@ -96,9 +100,11 @@ git clone git@github.com:khaledosman/react-redux-realworld-example-app.git realw
 git clone git@github.com:ditsmod/realworld.git realworld-backend
 ```
 
-📝 Both the frontend and backend are missing Dockerfiles, so you will have to create these yourself.
+📝 Both the frontend and backend are missing Dockerfiles, so you will have to
+create these yourself.
 
-NOTE: Some dependency issues might occur in the frontend, so try using `--force` when installing dependencies with `npm`.
+NOTE: Some dependency issues might occur in the frontend, so try using `--force`
+when installing dependencies with `npm`.
 
 ### Task 1
 
@@ -118,7 +124,7 @@ List the running containers with the `docker ps` command and see that a frontend
 
 ### Task 2
 
-When opening the browser at [localhost:4100](localhost:4100) we see that the frontend application is running and it is using the production backend api. Lets run the backend in a container instead. 
+When opening the browser at [localhost:4100](localhost:4100) we see that the frontend application is running and it is using the production backend api. Lets run the backend in a container instead.
 
 We have already cloned the backend project in `06-docker-compose/realworld/backend/node-realworld`. Follow the same structure as the one describing the frontend-service and include these instructions:
 
@@ -137,12 +143,13 @@ Run the following command again:
 docker compose up -d --build
 ```
 
-See that all containers are running with the `docker ps` command. 
+See that all containers are running with the `docker ps` command.
 
 ### Task 3
-Now try to access the appliaction through [localhost:4100](localhost:4100) again. 
 
-Woops. No connection?? Try adding an environment variable that defines the backend-service with its port as the value. 
+Now try to access the appliaction through [localhost:4100](localhost:4100) again.
+
+Woops. No connection?? Try adding an environment variable that defines the backend-service with its port as the value.
 
 ```yaml
 environment:
@@ -153,21 +160,21 @@ Add this to the spec of the `conduit-frontend` service in the `docker-compose.ym
 
 ### Task 4
 
-[Localhost:4100](localhost:4100) should now show the same interface as the first time you built the docker-compose file. But something is missing... 
+[Localhost:4100](localhost:4100) should now show the same interface as the first time you built the docker-compose file. But something is missing...
 
-There are noe tags and no posts showing. We need to add a database for this. 
+There are noe tags and no posts showing. We need to add a database for this.
 
 Add another service to your `docker-compose.yml` file:
 
 ```yaml
 real_world:
-    container_name: database
-    image: mysql:latest
-    ports: 
-      - "3306:3306"
-    volumes:
-      - ./backend/node-realworld/packages/server/sql/dump:/docker-entrypoint-initdb.d/
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=true
-      - MYSQL_DATABASE=realworld
+  container_name: database
+  image: mysql:latest
+  ports:
+    - "3306:3306"
+  volumes:
+    - ./backend/node-realworld/packages/server/sql/dump:/docker-entrypoint-initdb.d/
+  environment:
+    - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    - MYSQL_DATABASE=realworld
 ```
