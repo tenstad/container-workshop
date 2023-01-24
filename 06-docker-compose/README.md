@@ -120,13 +120,18 @@ Take a look at det docker-compose.yml file and run the following command:
 docker compose up -d --build
 ```
 
-List the running containers with the `docker ps` command and see that a frontend application is available at [localhost:4100](localhost:4100).
+List the running containers with the `docker ps` command and see that a frontend
+application is available at [localhost:4100](localhost:4100).
 
 ### Task 2
 
-When opening the browser at [localhost:4100](localhost:4100) we see that the frontend application is running and it is using the production backend api. Lets run the backend in a container instead.
+When opening the browser at [localhost:4100](localhost:4100) we see that the
+frontend application is running and it is using the production backend api. Lets
+run the backend in a container instead.
 
-We have already cloned the backend project in `06-docker-compose/realworld/backend/node-realworld`. Follow the same structure as the one describing the frontend-service and include these instructions:
+We have already cloned the backend project in
+`06-docker-compose/realworld/backend/node-realworld`. Follow the same structure
+as the one describing the frontend-service and include these instructions:
 
 ```bash
 container_name:
@@ -147,20 +152,24 @@ See that all containers are running with the `docker ps` command.
 
 ### Task 3
 
-Now try to access the appliaction through [localhost:4100](localhost:4100) again.
+Now try to access the appliaction through [localhost:4100](localhost:4100)
+again.
 
-Woops. No connection?? Try adding an environment variable that defines the backend-service with its port as the value.
+Woops. No connection?? Try adding an environment variable that defines the
+backend-service with its port as the value.
 
 ```yaml
 environment:
   - REACT_APP_BACKEND_URL=[backend-service:port]
 ```
 
-Add this to the spec of the `conduit-frontend` service in the `docker-compose.yml` file and run the same docker-compose command as above.
+Add this to the spec of the `conduit-frontend` service in the
+`docker-compose.yml` file and run the same docker-compose command as above.
 
 ### Task 4
 
-[Localhost:4100](localhost:4100) should now show the same interface as the first time you built the docker-compose file. But something is missing...
+[Localhost:4100](localhost:4100) should now show the same interface as the first
+time you built the docker-compose file. But something is missing...
 
 There are noe tags and no posts showing. We need to add a database for this.
 
